@@ -180,6 +180,7 @@ void detect_community(adjacency_list adj) {
   std::cerr << "Modularity: " << q << std::endl;
 }
 
+// Reordering する部分
 void reorder(adjacency_list adj) {
   std::cerr << "Generating a permutation...\n";
   const double tstart = rabbit_order::now_sec();
