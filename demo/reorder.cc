@@ -197,7 +197,7 @@ void reorder(adjacency_list adj) {
   std::copy(&p[0], &p[g.n()], std::ostream_iterator<vint>(std::cout, "\n"));
 }
 
-/*
+
 int main(int argc, char* argv[]) {
   using boost::adaptors::transformed;
 
@@ -227,9 +227,11 @@ int main(int argc, char* argv[]) {
 
   return EXIT_SUCCESS;
 }
-*/
+
+
 
 /*コミュニティid と Reordering id を同時に取得したい*/
+/*
 int main(int argc, char* argv[]) {
   using boost::adaptors::transformed;
 
@@ -255,4 +257,4 @@ int main(int argc, char* argv[]) {
 
   return EXIT_SUCCESS;
 }
-
+*/
