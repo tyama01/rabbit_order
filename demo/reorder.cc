@@ -197,6 +197,7 @@ void reorder(adjacency_list adj) {
   std::copy(&p[0], &p[g.n()], std::ostream_iterator<vint>(std::cout, "\n"));
 }
 
+/*
 int main(int argc, char* argv[]) {
   using boost::adaptors::transformed;
 
@@ -223,6 +224,34 @@ int main(int argc, char* argv[]) {
     detect_community(std::move(adj));
   else
     reorder(std::move(adj));
+
+  return EXIT_SUCCESS;
+}
+*/
+
+/*コミュニティid と Reordering id を同時に取得したい*/
+int main(int argc, char* argv[]) {
+  using boost::adaptors::transformed;
+
+  // Parse command-line arguments
+  if (argc != 2) {
+    std::cerr << "Usage: ./reorder GRAPH_FILE\n";
+    exit(EXIT_FAILURE);
+  }
+  const std::string graphpath = argv[1];
+
+  std::cerr << "Number of threads: " << omp_get_max_threads() << std::endl;
+
+  std::cerr << "Reading an edge-list file: " << graphpath << std::endl;
+  auto       adj = read_graph(graphpath);
+  const auto m   =
+      boost::accumulate(adj | transformed([](auto& es) {return es.size();}),
+                        static_cast<size_t>(0));
+  std::cerr << "Number of vertices: " << adj.size() << std::endl;
+  std::cerr << "Number of edges: "    << m          << std::endl;
+
+  detect_community(std::move(adj));
+  reorder(std::move(adj));
 
   return EXIT_SUCCESS;
 }
