@@ -8,6 +8,7 @@
 #include <boost/range/algorithm/count.hpp>
 #include "../rabbit_order.hpp"
 #include "edge_list.hpp"
+#include <fstream>
 
 using rabbit_order::vint;
 typedef std::vector<std::vector<std::pair<vint, float> > > adjacency_list;
@@ -173,8 +174,19 @@ void detect_community(adjacency_list adj) {
             << rabbit_order::now_sec() - tstart << std::endl;
 
   // Print the result
-  // 元グラフの頂点ID -> 所属するコミュニティ　　を出力
-  std::copy(&c[0], &c[g.n()], std::ostream_iterator<vint>(std::cout, "\n"));
+  // 元グラフの頂点ID -> 所属するコミュニティ　　を Print 出力
+  //std::copy(&c[0], &c[g.n()], std::ostream_iterator<vint>(std::cout, "\n"));
+
+  // 元グラフの頂点ID -> 所属するコミュニティ　　を txt_file 出力
+  std::cerr << "Writing the result to a file...\n";
+  std::ofstream outfile("output_cluster_id.txt");
+  if (outfile.is_open()) {
+    std::copy(&c[0], &c[g.n()], std::ostream_iterator<vint>(outfile, "\n"));
+    outfile.close();
+    std::cerr << "Result has been written to output_cluster_id.txt" << std::endl;
+  } else {
+    std::cerr << "Unable to open the output_cluster_id file" << std::endl;
+  }
 
   std::cerr << "Computing modularity of the result...\n";
   const double q = compute_modularity(adj, c.get());
@@ -193,11 +205,22 @@ void reorder(adjacency_list adj) {
             << rabbit_order::now_sec() - tstart << std::endl;
 
   // Print the result
-  // 元グラフの頂点ID -> Reordering後の頂点ID
-  std::copy(&p[0], &p[g.n()], std::ostream_iterator<vint>(std::cout, "\n"));
+  // 元グラフの頂点ID -> Reordering後の頂点ID Print出力
+  //std::copy(&p[0], &p[g.n()], std::ostream_iterator<vint>(std::cout, "\n"));
+
+  // 元グラフの頂点ID -> Reordering後の頂点ID txtファイル出力
+  std::cerr << "Writing the result to a file...\n";
+  std::ofstream outfile("output_new_id.txt");
+  if (outfile.is_open()) {
+    std::copy(&p[0], &p[g.n()], std::ostream_iterator<vint>(outfile, "\n"));
+    outfile.close();
+    std::cerr << "Result has been written to output_new_id.txt" << std::endl;
+  } else {
+    std::cerr << "Unable to open the output_new_id file" << std::endl;
+  }
 }
 
-/*
+
 int main(int argc, char* argv[]) {
   using boost::adaptors::transformed;
 
@@ -227,11 +250,11 @@ int main(int argc, char* argv[]) {
 
   return EXIT_SUCCESS;
 }
-*/
+
 
 
 /*コミュニティid と Reordering id を同時に取得したい*/
-
+/*
 int main(int argc, char* argv[]) {
   using boost::adaptors::transformed;
 
@@ -257,3 +280,4 @@ int main(int argc, char* argv[]) {
 
   return EXIT_SUCCESS;
 }
+*/
