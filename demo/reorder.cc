@@ -173,6 +173,7 @@ void detect_community(adjacency_list adj) {
             << rabbit_order::now_sec() - tstart << std::endl;
 
   // Print the result
+  // 元グラフの頂点ID -> 所属するコミュニティ　　を出力
   std::copy(&c[0], &c[g.n()], std::ostream_iterator<vint>(std::cout, "\n"));
 
   std::cerr << "Computing modularity of the result...\n";
@@ -192,6 +193,7 @@ void reorder(adjacency_list adj) {
             << rabbit_order::now_sec() - tstart << std::endl;
 
   // Print the result
+  // 元グラフの頂点ID -> Reordering後の頂点ID
   std::copy(&p[0], &p[g.n()], std::ostream_iterator<vint>(std::cout, "\n"));
 }
 
