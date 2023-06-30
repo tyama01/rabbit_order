@@ -34,7 +34,7 @@ program.
 
 ### Usage
 
-    Usage: reorder [-c] GRAPH_FILE
+    Usage: ./reorder [-c] GRAPH_FILE
       -c    Print community IDs instead of a new ordering
 
 If flag `-c` is given, this program runs in the *clustering mode*
