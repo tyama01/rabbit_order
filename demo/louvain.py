@@ -3,16 +3,17 @@ import networkx as nx
 import networkx.algorithms.community as nx_comm
 from collections import Counter
 
+FILE_PARH = "../datasets"
 #FILE_NAME = "karate"
 # FILE_NAME = "web-Google"
-FILE_NAME = "graph"
+FILE_NAME = "facebook"
 
 
 def main():
     # Input File Path (Source_nodeID    Target_nodeID)
-    input_file = "{}.txt".format(FILE_NAME)
+    input_file = "{}/{}.txt".format(FILE_PARH, FILE_NAME)
     # Output File Path (nodeID    CommunityID?)
-    output_file = "{}_louvain.txt".format(FILE_NAME)
+    output_file = "{}/{}_louvain.txt".format(FILE_PARH, FILE_NAME)
 
     G = nx.Graph()
     # Reading Graph
@@ -32,7 +33,7 @@ def main():
     # Output (nodeID    CommunityID?)
     with open(output_file, "w") as f:
         for v_id, c_id in partition.items():
-            f.write("{}\t{}\n".format(v_id, c_id))
+            f.write("{}\t{}\n".format(c_id, v_id))
 
 
 if __name__ == "__main__":
