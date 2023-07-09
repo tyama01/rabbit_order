@@ -1,6 +1,7 @@
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 from scipy.stats import linregress
 from matplotlib import rcParams as rcp
 
@@ -89,18 +90,24 @@ fig.set_facecolor("white")
 ax.set_facecolor("white")
 
 # x軸とy軸のラベルを設定する。
-ax.set_xlabel("a community", fontsize=14)
-ax.set_ylabel("nodes in a community", fontsize=14)
+ax.set_xlabel("community labels", fontsize=14)
+ax.set_ylabel("community size (num of nodes)", fontsize=14)
 
 # x軸の目盛のラベルの位置を変数xで保持する。
-x = np.arange(len(c_id))
 y = []
 for i in range(len(c_id)):
     y.append(len(c_id[i]))
-    
-y.sort(reverse=True)
 
-ax.bar(x, y)
+z = np.sort(y)[::-1]
+labels_data = np.argsort(y)[::-1]
+x = np.arange(len(labels_data))
+
+# x軸の目盛の位置を設定する。
+ax.xaxis.set_major_locator(mpl.ticker.FixedLocator(x))
+# x軸の目盛のラベルを設定する。
+ax.xaxis.set_major_formatter(mpl.ticker.FixedFormatter(labels_data))
+
+ax.bar(x, z)
 
 plt.show()
 

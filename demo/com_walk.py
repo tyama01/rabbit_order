@@ -1,6 +1,7 @@
 import networkx as nx
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 from scipy.stats import linregress
 from matplotlib import rcParams as rcp
 import random
@@ -63,3 +64,35 @@ for com_label in range(len(c_id)):
     com_walk_list.append(v_walk_num_cnt)
     
 print(len(com_walk_list))
+
+# ------------- Analysis ------------------------
+
+# x軸の目盛のラベルの位置を変数xで保持する。
+y = []
+for i in range(len(c_id)):
+    y.append(len(c_id[i]))
+
+z = np.sort(y)[::-1]
+labels_data = np.argsort(y)[::-1]
+x = np.arange(len(labels_data))
+
+data_list = []
+for com_id in labels_data:
+    data_list.append(list(com_walk_list[com_id].values()))
+    
+#data_tuple = tuple(data_list)
+
+# 箱ひげ図
+fig, ax = plt.subplots()
+
+# x軸とy軸のラベルを設定する。
+ax.set_xlabel("community labels", fontsize=14)
+ax.set_ylabel("walk nums", fontsize=14)
+
+bp = ax.boxplot(data_list)
+
+ax.set_xticklabels(labels_data)
+
+ax.grid()
+
+plt.show()
