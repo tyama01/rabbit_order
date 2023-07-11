@@ -107,7 +107,15 @@ ax.xaxis.set_major_locator(mpl.ticker.FixedLocator(x))
 # x軸の目盛のラベルを設定する。
 ax.xaxis.set_major_formatter(mpl.ticker.FixedFormatter(labels_data))
 
-ax.bar(x, z)
+x1 = x[:11]
+x2 = x[10:]
+        
+z1 = z[:11]
+z2 = z[10:]
 
+bar1 = ax.bar(x1, z1, label="common community")
+bar2 = ax.bar(x2, z2, label="small community")
+        
+plt.legend()
 plt.show()
 
