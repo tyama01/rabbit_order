@@ -148,6 +148,12 @@ ax.xaxis.set_major_locator(mpl.ticker.FixedLocator(x))
 #ax.xaxis.set_visible(False)
 ax.axes.xaxis.set_ticks([]) # x軸ラベル非表示
 
+# y軸の範囲を設定する。
+ax.set_ylim(0, 25000)
+# y軸の目盛の位置を設定する。
+ax.yaxis.set_major_locator(mpl.ticker.MultipleLocator(2500))
+
+
 #ax.scatter(x, y)
 ax.scatter(x, common_com_y, label="common community")
 ax.scatter(x, small_com_y, label="small community")
