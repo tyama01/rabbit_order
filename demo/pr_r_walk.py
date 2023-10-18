@@ -7,6 +7,8 @@ from matplotlib import rcParams as rcp
 import random
 from walk import *
 
+# /usr/bin/python3 /Users/tyama/rabbit_order/demo/pr_r_walk.py
+
  
 
 # -------------- データ読み込み ------------------

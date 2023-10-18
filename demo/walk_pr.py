@@ -7,7 +7,7 @@ from matplotlib import rcParams as rcp
 import random
 from walk import *
 
- 
+# /usr/bin/python3 /Users/tyama/rabbit_order/demo/walk_pr.py
 
 # -------------- データ読み込み ------------------
 dataset_name = input("Enter the dataset name : ")
